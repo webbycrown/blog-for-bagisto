@@ -1,0 +1,221 @@
+.grid-wrap{
+                margin: 0 -10px;
+            }
+            .column-9{
+                width: 75%;
+                padding:0 10px;
+            }
+            .column-3{
+                width: 25%;
+                padding:0 10px;
+            }
+            .blog-grid-list{
+                margin: 0 -10px;
+            }
+            .blog-post-item{
+                width: 33.33%;
+                padding: 0 10px;
+                margin-bottom: 20px;
+            }
+            .blog-post-box{
+              border: 1px solid rgba(0,0,0,.125);  
+              padding: 15px;
+              border-radius: 10px;
+              height: 100%;
+            }
+            .blog-post-box .card-text{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+            .blog-post-box .post-meta{
+                font-size: 13px;
+                color: #8d8d8d;
+                margin-bottom: 6px;
+            }
+            .blog-grid-img{
+                overflow: hidden;
+                position: relative;
+                margin-bottom: 20px;
+            }
+            .blog-grid-img:before{
+                content: '';
+                padding-top: 65%;
+                display: block;
+            }
+            .blog-grid-img img{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .blog-post-item .card-title{
+                font-size: 20px;
+                line-height: 1.2;
+                margin-bottom: 20px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+
+            .blog-post-item .card-footer{
+                margin-top: 20px;
+            }
+            .blog-post-item .card-footer a{
+                font-weight: 600;
+            }
+            .blog-post-item .card-title:hover,
+            .blog-post-item .card-footer a:hover{
+                color: #fbc256;
+            }
+            .blog-sidebar .categories{
+                padding-left: 20px;
+            }
+            .blog-sidebar .categories h3{
+                font-size: 20px;
+                line-height: 1.2;
+                margin-bottom: 15px;
+            }
+            .blog-sidebar .categories .list-group{
+                border: 1px solid rgba(0,0,0,.125);  
+                border-radius: 10px;
+            }
+            
+            .blog-sidebar .categories .list-group li{
+                border-top: 1px solid rgba(0,0,0,.125); 
+            }
+            .blog-sidebar .categories .list-group li:first-child{
+                border-top: 0;
+            }
+            .blog-sidebar .categories .list-group li a{
+                padding: 9px 15px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 15px;
+            }
+            .blog-sidebar .categories .list-group li a .badge-primary{
+                background: #4d7ea8;
+                border-radius: 30px;
+                color: #fff;
+                font-size: 13px;
+                padding: 2px 10px;
+
+            }
+            .pagination{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+            .pagination a{
+                width: 30px;
+                height: 30px;
+                border: 1px solid #4d7ea8;
+                color: #000;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .pagination a:hover,
+            .pagination a.active{
+                background: #4d7ea8;
+                color: #fff;
+            }
+            .pagination a.previous:before{
+                content: '<<';
+                letter-spacing: -4px;
+            }
+            .pagination a.previous .icon,
+            .pagination a.next .icon{
+                display: none;
+            }
+            .pagination a.next:before{
+                content: '>>';
+                letter-spacing: -4px;
+            }
+            .page-title{
+                font-size: 22px;
+            }
+            .tags-part{
+                margin-top: 30px;
+            }
+            .tags-part .tag-list{
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .tags-part .tag-list a{
+                background-color: #4d7ea8;
+                border-radius: 5px;
+                color: #fff;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                padding: 3px 10px;
+                gap:5px;
+            }
+            .tags-part .tag-list a .badge-light{
+                background: #fff;
+                border-radius: 5px;
+                padding: 2px 6px;
+                font-size: 13px;
+                color: #000;
+                line-height: 1;
+            }
+
+            @media all and (max-width: 1180px){
+                .blog-sidebar .categories {
+                padding-left: 0px;
+            }
+
+            }
+
+            @media all and (max-width: 1024px){
+                .column-3,
+               .column-9 {
+                width: 100%;
+                padding: 0 10px;
+            }
+            .blog-post-item {
+                width: 50%;
+                padding: 0 10px;
+                margin-bottom: 20px;
+            }
+
+            }
+            @media all and (max-width: 767px){
+               .blog-hero-image .hero-main-title{
+                font-size: 1.5rem;
+               }
+               .blog-hero-image{
+                height: 270px;
+                margin-bottom: 30px;
+               }
+               .container {
+                    width: 100%;
+                    margin-right: auto;
+                    margin-left: auto;
+                    padding-right: 20px;
+                    padding-left: 20px;
+                }
+                .page-title {
+                    font-size: 22px;
+                    margin-bottom: 15px;
+                }
+                .comment-part .column-6 {
+                    width: 100%;
+                    padding: 0 10px;
+                }
+                .blog-post-item {
+                    width: 100%;
+                    padding: 0 10px;
+                    margin-bottom: 20px;
+                }
+            }

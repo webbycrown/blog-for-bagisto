@@ -1,0 +1,36 @@
+{
+    "name": "webbycrown/blog-for-bagisto",
+    "description": "Blog for Bagisto",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "WebbyCrown Solutions",
+            "email": "info@webbycrown.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/webbycrown/blog-for-bagisto"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "darkaonline/l5-swagger": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webbycrown\\BlogBagisto\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webbycrown\\BlogBagisto\\Providers\\BlogServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

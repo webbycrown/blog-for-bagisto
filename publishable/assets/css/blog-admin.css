@@ -1,0 +1,1 @@
+.blog-icon{width:48px;height:48px;display:inline-block;background-size:cover;background-image:url("../images/Icon-Blog.svg")}.active.blog-icon,.active .blog-icon,.router-link-active.blog-icon,blog-icon{background-image:url("../images/Icon-Blog-Active.svg");}
