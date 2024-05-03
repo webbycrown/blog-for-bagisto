@@ -53,10 +53,10 @@
         </div>
 
         <!-- Full Pannel -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
 
             <!-- Left Section -->
-            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 <!-- General -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
@@ -297,12 +297,12 @@
             </div>
 
             <!-- Right Section -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full">
                 <!-- Settings -->
 
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-800 dark:text-gray-300 text-base font-semibold">
                             @lang('admin::app.catalog.categories.create.settings')
                         </p>
                     </x-slot:header>
@@ -431,7 +431,7 @@
                 <!-- Default Categories -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="required p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="required p-2.5 text-gray-800 dark:text-gray-300 text-base font-semibold">
                             {{-- @lang('blog::app.blog.categories_title') --}}
                             Default Category
                         </p>
@@ -470,7 +470,7 @@
                 <!-- Additional Category -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-800 dark:text-gray-300 text-base font-semibold">
                             {{-- @lang('blog::app.blog.categories_title') --}}
                             Additional Category
                         </p>
@@ -499,7 +499,7 @@
                 <!-- Tags -->
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="required p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="required p-2.5 text-gray-800 dark:text-gray-300 text-base font-semibold">
                             @lang('blog::app.blog.tag_title')
                         </p>
                     </x-slot:header>

@@ -11,7 +11,7 @@ use Webbycrown\BlogBagisto\Models\Tag;
 use Webbycrown\BlogBagisto\Models\Comment;
 use Webkul\Core\Models\CoreConfig;
 use Webbycrown\BlogBagisto\Repositories\BlogCommentRepository;
-use Webkul\Shop\Repositories\ThemeCustomizationRepository;
+use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller

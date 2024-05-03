@@ -61,7 +61,7 @@ class CategoryController extends Controller
     {
         $locale = core()->getRequestedLocaleCode();
 
-        $categories = Category::whereNull('parent_id')->where('status', 1)->get();
+        $categories = Category::where('parent_id', 0)->where('status', 1)->get();
 
         return view($this->_config['view'], compact('categories'))->with('locale', $locale);
     }
@@ -109,7 +109,7 @@ class CategoryController extends Controller
 
         Session::put('bCatEditId', $id);
 
-        $categories_data = Category::whereNull('parent_id')->where('status', 1)->where('id', '!=', $id)->get();
+        $categories_data = Category::where('parent_id', 0)->where('status', 1)->where('id', '!=', $id)->get();
         
         Session::remove('bCatEditId');
 

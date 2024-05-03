@@ -67,7 +67,7 @@ class BlogController extends Controller
 
         $categories = Category::all();
 
-        $additional_categories = Category::whereNull('parent_id')->where('status', 1)->get();
+        $additional_categories = Category::where('parent_id', 0)->where('status', 1)->get();
 
         $tags = Tag::all();
 
@@ -135,7 +135,7 @@ class BlogController extends Controller
 
         $categories = Category::all();
 
-        $additional_categories = Category::whereNull('parent_id')->where('status', 1)->get();
+        $additional_categories = Category::where('parent_id', 0)->where('status', 1)->get();
 
         $tags = Tag::all();
 

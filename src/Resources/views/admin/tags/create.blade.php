@@ -16,12 +16,12 @@
 
         {!! view_render_event('admin.blog.tags.create.before') !!}
 
-        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 @lang('blog::app.tag.add-title')
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
                 <!-- Back Button -->
                 <a
                     href="{{ route('admin.blog.tag.index') }}"
@@ -41,14 +41,14 @@
         </div>
 
         <!-- Full Pannel -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
 
             <!-- Left Section -->
-            <div class="flex flex-col gap-[8px] flex-1 max-xl:flex-auto">
+            <div class="flex flex-col gap-2 flex-1 max-xl:flex-auto">
 
                 <!-- General -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                         @lang('admin::app.catalog.categories.create.general')
                     </p>
 
@@ -154,8 +154,8 @@
                 </div>
 
                 <!-- SEO Deatils -->
-                <div class="p-[16px] bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                         @lang('blog::app.tag.search_engine_optimization')
                     </p>
 
@@ -231,12 +231,12 @@
             </div>
 
             <!-- Right Section -->
-            <div class="flex flex-col gap-[8px] w-[360px] max-w-full">
+            <div class="flex flex-col gap-2 w-[360px] max-w-full">
                 <!-- Settings -->
 
                 <x-admin::accordion>
                     <x-slot:header>
-                        <p class="p-[10px] text-gray-600 dark:text-gray-300 text-[16px] font-semibold">
+                        <p class="p-2.5 text-gray-600 dark:text-gray-300 text-base font-semibold">
                             @lang('admin::app.catalog.categories.create.settings')
                         </p>
                     </x-slot:header>

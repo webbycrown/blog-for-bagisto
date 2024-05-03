@@ -31,12 +31,12 @@
 
         {!! view_render_event('admin.blogs.setting.before') !!}
 
-        <div class="flex gap-[16px] justify-between items-center max-sm:flex-wrap">
-            <p class="text-[20px] text-gray-800 dark:text-white font-bold">
+        <div class="flex gap-4 justify-between items-center max-sm:flex-wrap">
+            <p class="text-xl text-gray-800 dark:text-white font-bold">
                 {{ __('Blog Setting') }}
             </p>
 
-            <div class="flex gap-x-[10px] items-center">
+            <div class="flex gap-x-2.5 items-center">
 
                 <!-- Save Button -->
                 <button
@@ -48,13 +48,13 @@
         </div>
 
         <!-- Full Pannel -->
-        <div class="flex gap-[10px] mt-[14px] max-xl:flex-wrap">
+        <div class="flex gap-2.5 mt-3.5 max-xl:flex-wrap">
 
-            <div class="flex flex-wrap flex-col-box gap-[8px] flex-1 max-xl:flex-auto">
+            <div class="flex flex-wrap flex-col-box gap-2 flex-1 max-xl:flex-auto">
             
                 <!-- Post Setting Section -->
-                <div class="p-[16px] w-50 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                <div class="p-4 w-50 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                         {{ __('Post Setting') }}
                     </p>
 
@@ -196,8 +196,8 @@
                 </div>
                 
                 <!-- Comment Setting Section -->
-                <div class="p-[16px] w-50 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                <div class="p-4 w-50 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                         {{ __('Comment Setting') }}
                     </p>
 
@@ -294,15 +294,15 @@
                 </div>
 
                 <!-- Default Blog SEO Setting Section -->
-                <div class="p-[16px] w-50 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
-                    <p class="mb-[16px] text-[16px] text-gray-800 dark:text-white font-semibold">
+                <div class="p-4 w-50 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">
+                    <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
                         {{ __('Default Blog SEO Setting') }}
                     </p>
 
                     <div class="mt-8">
                         
                         {{-- Meta Title --}}
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 {{ __('Meta Title') }}
                             </x-admin::form.control-group.label>
@@ -319,7 +319,7 @@
                         </x-admin::form.control-group>
 
                         {{-- Meta Keywords --}}
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 {{ __('Meta Keywords') }}
                             </x-admin::form.control-group.label>
@@ -336,7 +336,7 @@
                         </x-admin::form.control-group>
 
                         {{-- Meta Description --}}
-                        <x-admin::form.control-group class="mb-[10px]">
+                        <x-admin::form.control-group class="mb-2.5">
                             <x-admin::form.control-group.label>
                                 {{ __('Meta Description') }}
                             </x-admin::form.control-group.label>
