@@ -12,6 +12,8 @@ use Webbycrown\BlogBagisto\Models\Tag;
 use Webbycrown\BlogBagisto\Repositories\BlogRepository;
 use Webkul\User\Models\Admin;
 use Webbycrown\BlogBagisto\Http\Requests\BlogRequest;
+use Carbon\Carbon;
+use Webbycrown\BlogBagisto\Models\Blog;
 
 class BlogController extends Controller
 {
@@ -31,7 +33,7 @@ class BlogController extends Controller
      */
     public function __construct(protected BlogRepository $blogRepository)
     {
-        $this->middleware('admin');
+        // $this->middleware('admin');
 
         $this->_config = request('_config');
     }
@@ -52,8 +54,51 @@ class BlogController extends Controller
 
     public function list()
     {
-        // return 'Blog API with Swagger!';
-        return $this->blogRepository->getActiveBlogs();
+        try{
+
+            $locale = config('app.locale');
+
+            $req_data = request()->all();
+            $blog_slug = ( array_key_exists( 'slug', $req_data ) ) ? $req_data[ 'slug' ] : '';
+            if ( array_key_exists( 'slug', $req_data ) ) {
+                if ( !isset( $blog_slug ) || empty( $blog_slug ) || is_null( $blog_slug ) ) {
+                    return response()->json([
+                        'status_code' => 500,
+                        'status' => 'error',
+                        'message' => 'blog slug required',
+                        'data' => []
+                    ],200);
+                }
+                $blogs = Blog::where( 'slug', $blog_slug )
+                ->where('published_at', '<=', Carbon::now()->format('Y-m-d'))
+                ->where('status', 1)
+                ->where('locale', $locale)
+                ->orderBy('id', 'DESC')
+                ->first();
+            } else {
+                $blogs = Blog::where('published_at', '<=', Carbon::now()->format('Y-m-d'))
+                ->where('status', 1)
+                ->where('locale', $locale)
+                ->orderBy('id', 'DESC')
+                ->paginate(12);
+            }
+            return response()->json([
+                'status_code' => 200,
+                'status' => 'success',
+                'message' => 'get blog successfully',
+                'data' => $blogs
+            ],200);
+
+        } catch(\Exception $e) {
+
+            return response()->json([
+                'status_code' => 500,
+                'status' => 'error',
+                'message' => $e->getMessage(),
+                'data' => null
+            ],200);
+
+        }
     }
 
     /**

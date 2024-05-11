@@ -6,6 +6,7 @@ use Webbycrown\BlogBagisto\Http\Controllers\Admin\CategoryController;
 use Webbycrown\BlogBagisto\Http\Controllers\Admin\TagController;
 use Webbycrown\BlogBagisto\Http\Controllers\Admin\CommentController;
 use Webbycrown\BlogBagisto\Http\Controllers\Admin\SettingController;
+use Webbycrown\BlogBagisto\Http\Controllers\Admin\ImportController;
 
 Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_url')], function () {
 
@@ -119,6 +120,21 @@ Route::group(['middleware' => ['web', 'admin'], 'prefix' => config('app.admin_ur
     Route::post('blog/setting/store', [SettingController::class, 'store'])->defaults('_config', [
         'redirect' => 'admin.blog.setting.index',
     ])->name('admin.blog.setting.store');
+
+    /**
+     * Admin blog import routes
+     */
+    Route::get('blog/import/export', [ImportController::class, 'index'])->defaults('_config', [
+        'view' => 'blog::admin.import.index',
+    ])->name('admin.blog.import.export');
+
+    Route::post('blog/import/store', [ImportController::class, 'import'])->defaults('_config', [
+        'view' => 'blog::admin.import.index',
+    ])->name('admin.blog.import.store');
+
+    Route::get('blog/export/download', [ImportController::class, 'export'])->defaults('_config', [
+        'view' => 'blog::admin.import.index',
+    ])->name('admin.blog.export.download');
 
 });
 

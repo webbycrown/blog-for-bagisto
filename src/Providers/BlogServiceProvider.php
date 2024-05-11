@@ -29,6 +29,10 @@ class BlogServiceProvider extends ServiceProvider
         ], 'public');
 
         $this->publishes([
+            __DIR__ . '/../../publishable/blog' => storage_path('app/public'),
+        ], 'public');
+
+        $this->publishes([
             __DIR__.'/../Config/l5-swagger.php' => config_path('l5-swagger.php'),
         ], ['webbycrown-blog-api-swagger']);
 

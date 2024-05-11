@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('image');
             $table->boolean('status');
-            $table->foreignId('parent_id')->default(0);
+            $table->foreignId('parent_id')->default(0)->nullable();
             $table->string('locale');
             $table->string('meta_title');
             $table->string('meta_description');

@@ -86,6 +86,11 @@ return [
         'name'  => 'Setting',
         'route' => 'admin.blog.setting.index',
         'sort'  => 5,
+    ], [
+        'key'   => 'blog.import_export',
+        'name'  => 'Import/Export',
+        'route' => 'admin.blog.import.export',
+        'sort'  => 6,
     ]
 
 ];

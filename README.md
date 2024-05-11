@@ -2,7 +2,7 @@
 
 ## 1. Introduction:
 
-"Blog for Bagisto" extension offers free, advanced-level features allowing seamless integration of blogs into Bagisto stores. It includes SEO-friendly URLs, categorized blogs, responsive images, comment widgets, and customizable widgets.
+"Blog for Bagisto" extension offers free, advanced-level features allowing seamless integration of blogs into Bagisto stores. It includes SEO-friendly URLs, categorized blogs, responsive images, comment widgets, customizable widgets, and blogs import/export.
 
 * SEO-friendly URL by navigating blog pages by page number and organizing posts by primary category and unique slug.
 * Blogs organized by category, tag, and author, enhancing user navigation and enabling focused browsing within specific content categories.
@@ -12,6 +12,8 @@
 * Various widgets available: recent posts on homepage, related posts on detail page, and recent posts with nested replies support.
 * Enables posts and comments to support nested replies, facilitating organized discussions with threaded responses for enhanced engagement and interaction.
 * Allows users to designate a specific date for publishing individual blog posts within the Bagisto extension.
+* import/export features for easy content management: upload CSV files to add or update posts and export data for backup or transfer, streamlining blog organization and upkeep.
+
 
 
 ## 2. Requirements:
