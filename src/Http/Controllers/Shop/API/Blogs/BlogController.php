@@ -3,63 +3,35 @@
 namespace Webbycrown\BlogBagisto\Http\Controllers\Shop\API\Blogs;
 
 use Illuminate\Routing\Controller;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Webbycrown\BlogBagisto\Datagrids\BlogDataGrid;
+use Webbycrown\BlogBagisto\Models\Blog;
 use Webbycrown\BlogBagisto\Models\Category;
 use Webbycrown\BlogBagisto\Models\Tag;
-use Webbycrown\BlogBagisto\Repositories\BlogRepository;
 use Webkul\User\Models\Admin;
-use Webbycrown\BlogBagisto\Http\Requests\BlogRequest;
 use Carbon\Carbon;
-use Webbycrown\BlogBagisto\Models\Blog;
 
 class BlogController extends Controller
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * Contains route related configuration
+     * Retrieves a list of blogs.
      *
-     * @var array
-     */
-    protected $_config;
-
-    /**
-     * Create a new controller instance.
+     * This function retrieves a list of blogs, presumably from a data source
+     * such as a database, API, or other storage mechanism.
      *
-     * @return void
+     * @return array An array of blogs retrieved from the data source.
      */
-    public function __construct(protected BlogRepository $blogRepository)
-    {
-        // $this->middleware('admin');
-
-        $this->_config = request('_config');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
-    {
-        if (request()->ajax()) {
-            return app(BlogDataGrid::class)->toJson();
-        }
-
-        return view($this->_config['view']);
-    }
-
     public function list()
     {
         try{
-
+            
             $locale = config('app.locale');
 
             $req_data = request()->all();
             $blog_slug = ( array_key_exists( 'slug', $req_data ) ) ? $req_data[ 'slug' ] : '';
+            $category_slug = ( array_key_exists( 'category', $req_data ) ) ? $req_data[ 'category' ] : '';
+            $tag_slug = ( array_key_exists( 'tag', $req_data ) ) ? $req_data[ 'tag' ] : '';
+            $search = ( array_key_exists( 's', $req_data ) ) ? $req_data[ 's' ] : '';
+
             if ( array_key_exists( 'slug', $req_data ) ) {
                 if ( !isset( $blog_slug ) || empty( $blog_slug ) || is_null( $blog_slug ) ) {
                     return response()->json([
@@ -76,11 +48,47 @@ class BlogController extends Controller
                 ->orderBy('id', 'DESC')
                 ->first();
             } else {
-                $blogs = Blog::where('published_at', '<=', Carbon::now()->format('Y-m-d'))
-                ->where('status', 1)
-                ->where('locale', $locale)
-                ->orderBy('id', 'DESC')
-                ->paginate(12);
+                $blogs = Blog::where('published_at', '<=', Carbon::now()->format('Y-m-d'))->where('status', 1)->where('locale', $locale);
+
+                if ( isset( $category_slug ) && !empty( $category_slug ) && !is_null( $category_slug ) ) {
+                    $category_id = 0;
+                    $category = Category::where( 'slug', $category_slug )->where('locale', $locale)->first();
+                    if ( $category ) {
+                        $category_id = $category->id;
+                    }
+                    $blogs = $blogs->where(function ($q) use ($category_id) {
+                        $q->where( 'default_category', $category_id )->orWhereRaw( 'FIND_IN_SET( ?, categorys )', [ $category_id ] );
+                    });
+                }
+
+                if ( isset( $tag_slug ) && !empty( $tag_slug ) && !is_null( $tag_slug ) ) {
+                    $tag_id = 0;
+                    $tag = Category::where( 'slug', $tag_slug )->where('locale', $locale)->first();
+                    if ( $tag ) {
+                        $tag_id = $tag->id;
+                    }
+                    $blogs = $blogs->whereRaw( 'FIND_IN_SET( ?, tags )', [ $tag_id ] );
+                }
+
+                if ( isset( $search ) && !empty( $search ) && !is_null( $search ) ) {
+                    $blogs = $blogs->where(function ($q) use ($search) {
+                        $q->where( 'name', 'like', '%' . $search . '%' );
+                    });
+                }
+
+                $blogs = $blogs->orderBy('id', 'DESC');
+
+                $page = 1;
+                $perpage = 12;
+                if( request()->get("page_no") ){
+                    $page = request()->get("page_no");
+                }
+                if( request()->get("per_page") ){
+                    $perpage = request()->get("per_page");
+                }
+                $offset = ( $page - 1 ) * $perpage;
+                $blogs = $blogs->limit( $perpage )->offset( $offset )->get();
+
             }
             return response()->json([
                 'status_code' => 200,
@@ -102,176 +110,75 @@ class BlogController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Retrieves a list of categories.
      *
-     * @return \Illuminate\View\View
+     * @return array|null Returns an array of categories if found, or null if no categories are available.
      */
-    public function create()
+    public function category_list()
     {
-        $locale = core()->getRequestedLocaleCode();
+        try{
 
-        $categories = Category::all();
+            $result = false;
+            
+            $locale = config('app.locale');
 
-        $tags = Tag::all();
+            $blog_categorys = Category::where('status', 1)->where('locale', $locale)->orderBy('id', 'DESC')->get();
 
-        $users = Admin::all();
-
-        return view($this->_config['view'], compact('categories', 'tags', 'users'))->with('locale', $locale);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(BlogRequest $blogRequest)
-    {
-        /*$this->validate(request(), [
-            'slug'                  => 'slug', 'unique',
-            'name'                  => 'required',
-            'channels'              => 'required',
-            'image.*'               => 'required|mimes:bmp,jpeg,jpg,png,webp',
-            'default_category'      => 'required',
-        ]);*/
-
-        $data = request()->all();
-
-        if (is_array($data['locale'])) {
-            $data['locale'] = implode(',', $data['locale']);
-        }
-
-        if (is_array($data['tags'])) {
-            $data['tags'] = implode(',', $data['tags']);
-        }
-
-        $result = $this->blogRepository->save($data);
-
-        if ($result) {
-            session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Blog']));
-        } else {
-            session()->flash('success', trans('blog::app.blog.created-fault'));
-        }
-
-        return redirect()->route($this->_config['redirect']);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $blog = $this->blogRepository->findOrFail($id);
-
-        $categories = Category::all();
-
-        $tags = Tag::all();
-
-        $users = Admin::all();
-
-        return view($this->_config['view'], compact('blog', 'categories', 'tags', 'users'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(BlogRequest $blogRequest, $id)
-    {
-        /*$this->validate(request(), [
-            'slug'                  => 'slug', 'unique',
-            'name'                  => 'required',
-            'channels'              => 'required',
-            'image'                 => 'required',
-            'default_category'      => 'required',
-        ]);*/
-
-        $data = request()->all();
-
-        if (is_array($data['locale'])) {
-            $data['locale'] = implode(',', $data['locale']);
-        }
-        
-        if (is_array($data['tags'])) {
-            $data['tags'] = implode(',', $data['tags']);
-        }
-
-        if (is_null(request()->src)) {
-            session()->flash('error', trans('blog::app.blog.updated-fault'));
-
-            return redirect()->back();
-        }
-
-        $result = $this->blogRepository->updateItem($data, $id);
-
-        if ($result) {
-            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Blog']));
-        } else {
-            session()->flash('error', trans('blog::app.blog.updated-fault'));
-        }
-
-        return redirect()->route($this->_config['redirect']);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $this->blogRepository->findOrFail($id);
-
-        try {
-            $this->blogRepository->delete($id);
-
-            return response()->json(['message' => trans('admin::app.response.delete-success', ['name' => 'Blog'])]);
-        } catch (\Exception $e) {
-            report($e);
-        }
-
-        return response()->json(['message' => trans('admin::app.response.delete-failed', ['name' => 'Blog'])], 500);
-    }
-
-    /**
-     * Remove the specified resources from database.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function massDestroy()
-    {
-        $suppressFlash = false;
-
-        if (request()->isMethod('post')) {
-            // $indexes = explode(',', request()->input('indexes'));
-            $indexes = (array)request()->input('indices');
-
-            foreach ($indexes as $key => $value) {
-                try {
-                    $this->blogRepository->delete($value);
-                } catch (\Exception $e) {
-                    $suppressFlash = true;
-
-                    continue;
-                }
+            if ( $blog_categorys && count( $blog_categorys ) > 0 ) {
+                $result = true;
             }
 
-            if (! $suppressFlash) {
-                session()->flash('success', trans('admin::app.datagrid.mass-ops.delete-success', ['resource' => 'Blog']));
-            } else {
-                session()->flash('info', trans('admin::app.datagrid.mass-ops.partial-action', ['resource' => 'Blog']));
-            }
+            return response()->json([
+                'message' => 'get blog category successfully',
+                'result' => true,
+                'data' => $blog_categorys
+            ],200);
 
-            return redirect()->back();
-        } else {
-            session()->flash('error', trans('admin::app.datagrid.mass-ops.method-error'));
+        } catch(\Exception $e) {
 
-            return redirect()->back();
+            return response()->json([
+                'message' => $e->getMessage(),
+                'result' => false,
+                'data' => null
+            ],200);
+
         }
     }
+
+    /**
+     * Retrieve a list of tags associated with the object.
+     *
+     * @return array An array containing the tags.
+     */
+    public function tag_list()
+    {
+        try{
+
+            $result = false;
+            
+            $locale = config('app.locale');
+
+            $blog_tags = Tag::where('status', 1)->where('locale', $locale)->orderBy('id', 'DESC')->get();
+
+            if ( $blog_tags && count( $blog_tags ) > 0 ) {
+                $result = true;
+            }
+
+            return response()->json([
+                'message' => 'get blog tag successfully',
+                'result' => true,
+                'data' => $blog_tags
+            ],200);
+
+        } catch(\Exception $e) {
+
+            return response()->json([
+                'message' => $e->getMessage(),
+                'result' => false,
+                'data' => null
+            ],200);
+
+        }
+    }
+
 }

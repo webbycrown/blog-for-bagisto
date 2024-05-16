@@ -33,3 +33,5 @@ Route::group([
 });
     Route::get('/api/v1/blogs', 'Webbycrown\BlogBagisto\Http\Controllers\Shop\API\Blogs\BlogController@list');
     Route::post('/api/v1/blog/comment/store', 'Webbycrown\BlogBagisto\Http\Controllers\Shop\CommentController@store')->name('shop.blog.comment.store');
+    Route::get('/api/v1/blog/category', 'Webbycrown\BlogBagisto\Http\Controllers\Shop\API\Blogs\BlogController@category_list')->name('shop.blog.category.list');
+    Route::get('/api/v1/blog/tag', 'Webbycrown\BlogBagisto\Http\Controllers\Shop\API\Blogs\BlogController@tag_list')->name('shop.blog.category.list');
