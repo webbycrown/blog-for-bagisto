@@ -15,7 +15,7 @@
 <x-shop::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        {{ __('Blog Author Page') }}
+        Posts by {{ $author_data->author }}
     </x-slot>
 
     @push ('styles')

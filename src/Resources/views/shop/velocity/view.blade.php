@@ -15,7 +15,7 @@
 <x-shop::layouts>
     {{-- Page Title --}}
     <x-slot:title>
-        {{ __('Single Blog Page') }}
+        {{ $blog->meta_title ?? ( $blog_seo_meta_title ?? ( $channel->home_seo['meta_title'] ?? '' ) ) }}
     </x-slot>
 
     @push ('styles')
