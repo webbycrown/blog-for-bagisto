@@ -38,7 +38,7 @@
                                         <h1 class="hero-main-title">{{ $category->name }}</h1>
                                         <img
                                         src="{{ '/storage/' . ( ( isset($category->image) && !empty($category->image) && !is_null($category->image) ) ? $category->image : 'placeholder-banner.jpg' ) }}"
-                                        alt="Blanditiis soluta et iste consectetur sapiente nobis ut perferendis fugiat veritatis incidunt dolore."
+                                        alt="{{ $category->name }}"
                                         class="card-img img-fluid img-thumbnail bg-fill">
                                     </div>
                                 </section>
