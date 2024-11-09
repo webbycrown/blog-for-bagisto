@@ -59,7 +59,7 @@ class TagDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'id',
             'label'      => trans('blog::app.datagrid.id'),
-            'type'       => 'number',
+            'type'       => 'integer',
             'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
