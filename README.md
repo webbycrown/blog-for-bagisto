@@ -57,3 +57,8 @@ https://example.com/admin/blog
 ```
 https://example.com/blog
 ```
+---
+
+<div align="center">
+  <strong>Made with ❤️ by <a href="https://webbycrown.com">WebbyCrown</a></strong>
+</div>
