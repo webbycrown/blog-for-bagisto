@@ -26,7 +26,7 @@
 
 - Run the following command
 ```
-composer require webbycrown/blog-for-bagisto:dev-main
+composer require webbycrown/blog-for-bagisto
 ```
 
 - Run these commands below to complete the setup
