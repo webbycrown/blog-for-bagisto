@@ -37,7 +37,7 @@
                                     <div class="blog-hero-image">
                                         <h1 class="hero-main-title">{{ $tag->name }}</h1>
                                         <img
-                                        src="{{ '/storage/placeholder-banner.jpg' }}"
+                                        src="{{ '/storage/' . ( ( isset($tag->image) && !empty($tag->image) && !is_null($tag->image) ) ? $tag->image : 'placeholder-banner.jpg' ) }}"
                                         alt=""
                                         class="card-img img-fluid img-thumbnail bg-fill">
                                     </div>

@@ -125,33 +125,56 @@
                     </x-admin::form.control-group>
 
                     <!-- Description -->
-                    <v-description>
-                        <x-admin::form.control-group class="mb-2.5">
-                            <x-admin::form.control-group.label class="required">
-                                @lang('blog::app.tag.description')
-                            </x-admin::form.control-group.label>
+                    <div class="p-4 bg-white dark:bg-gray-900 rounded box-shadow">
+                        <p class="mb-4 text-base text-gray-800 dark:text-white font-semibold">
+                            @lang('blog::app.blog.description-and-images')
+                        </p>
+                        <v-description>
+                            <x-admin::form.control-group class="mb-2.5">
+                                <x-admin::form.control-group.label class="required">
+                                    @lang('blog::app.tag.description')
+                                </x-admin::form.control-group.label>
 
-                            <x-admin::form.control-group.control
-                                type="textarea"
-                                name="description"
-                                id="description"
-                                class="description"
-                                rules="required"
-                                :value="old('description') ?? $tag->description"
-                                :label="trans('blog::app.tag.description')"
-                                :tinymce="true"
-                                :prompt="core()->getConfigData('general.magic_ai.content_generation.category_description_prompt')"
-                            >
-                            </x-admin::form.control-group.control>
+                                <x-admin::form.control-group.control
+                                    type="textarea"
+                                    name="description"
+                                    id="description"
+                                    class="description"
+                                    rules="required"
+                                    :value="old('description') ?? $tag->description"
+                                    :label="trans('blog::app.tag.description')"
+                                    :tinymce="true"
+                                    :prompt="core()->getConfigData('general.magic_ai.content_generation.category_description_prompt')"
+                                    >
+                                </x-admin::form.control-group.control>
 
-                            <x-admin::form.control-group.error
+                                <x-admin::form.control-group.error
                                 control-name="description"
-                            >
+                                >
                             </x-admin::form.control-group.error>
                         </x-admin::form.control-group>
                     </v-description>
 
+                    <div class="flex gap-12">
+                        <!-- Add Logo -->
+                        <div class="flex flex-col gap-2 w-2/5 mt-5">
+                            <p class="text-gray-800 dark:text-white font-medium">
+                                @lang('blog::app.tag.image')
+                            </p>
+
+                            <x-admin::media.images 
+                            name="image" 
+                            :uploaded-images="$tag->image ? [['id' => 'image', 'url' => $tag->image_url]] : []"
+                            >
+
+                        </x-admin::media.images>
+
+                    </div>
+
                 </div>
+
+            </div>
+        </div>
 
                 <!-- SEO Deatils -->
                 <div class="p-4 bg-white dark:bg-gray-900 rounded-[4px] box-shadow">

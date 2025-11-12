@@ -16,6 +16,7 @@ class Tag extends Model implements TagContract
         'name',
         'slug',
         'description',
+        'image',
         'status',
         'locale',
         'meta_title',

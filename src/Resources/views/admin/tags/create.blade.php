@@ -151,6 +151,21 @@
                         </x-admin::form.control-group>
                     </v-description>
 
+
+                    <div class="flex gap-12">
+                        <!-- Add Logo -->
+                        <div class="flex flex-col gap-2 w-2/5 mt-5">
+                            <p class="text-gray-800 dark:text-white font-medium">
+                                @lang('blog::app.tag.image')
+                            </p>
+
+                            <x-admin::media.images name="image" rules="required"></x-admin::media.images>
+
+                            <x-admin::form.control-group.error control-name="image"></x-admin::form.control-group.error>
+
+                        </div>
+
+                    </div>
                 </div>
 
                 <!-- SEO Deatils -->
