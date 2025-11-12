@@ -1,18 +1,13 @@
 {
     "name": "webbycrown/blog-for-bagisto",
     "description": "Blog for Bagisto",
+    "version": "1.0.1",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "WebbyCrown Solutions",
             "email": "info@webbycrown.com"
-        }
-    ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/webbycrown/blog-for-bagisto"
         }
     ],
     "require": {
@@ -31,5 +26,5 @@
             "aliases": {}
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
