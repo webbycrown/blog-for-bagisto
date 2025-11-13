@@ -57,6 +57,43 @@ https://example.com/admin/blog
 ```
 https://example.com/blog
 ```
+## 📊 Changelog
+
+### v1.0.1
+
+- 🖼️ **Tag Image Support** - Added image upload functionality for blog tags
+- 📸 Image upload capability in admin tag creation and edit forms with preview
+- 🎨 Automatic image conversion to **WebP format** for optimized performance
+- 📁 Organized image storage in structured directories (`blog-tag/{tag_id}/`)
+- ✅ Image validation supporting multiple formats (bmp, jpeg, jpg, png, webp)
+- 🔄 Enhanced **BlogTagRepository** with comprehensive image management
+- 🎯 Updated Tag model with `image_url` accessor for storage URL generation
+- 💎 Improved admin UI layout with better styling for tag management
+- 🛍️ Shop frontend now displays custom tag images instead of placeholder banners
+- 🧹 Automatic cleanup of old images when updating or deleting tags
+- 🐛 Code quality improvements based on Bagisto community feedback
+- 🔧 Fixed missing accessor method in Tag model to prevent display errors
+
+---
+
+### v1.0.0
+
+- ✨ Initial release of **Blog for Bagisto** extension
+- 🔍 SEO-friendly URL structure with page navigation and category organization
+- 📂 Blog organization by category, tag, and author for enhanced navigation
+- 📱 Responsive image support across all devices and screen sizes
+- 🏷️ Category and tag display with associated post counts
+- 💬 Configurable comment widget for individual posts with nested reply support
+- 🎛️ Multiple widgets: recent posts, related posts, and nested replies
+- 📅 Scheduled publishing for individual blog posts
+- 📤 Import/Export functionality via CSV for easy content management
+- 🌍 Multi-language support (English, Portuguese BR, Turkish)
+- 🎨 Admin panel for complete blog management
+- 🛒 Shop frontend with default and Velocity theme support
+- 🔎 SEO meta tags support for all blog content
+- 🗑️ Soft delete functionality for blogs, categories, tags, and comments
+- 🚀 Published to Composer: [webbycrown/blog-for-bagisto](https://packagist.org/packages/webbycrown/blog-for-bagisto)
+
 ---
 
 <div align="center">
